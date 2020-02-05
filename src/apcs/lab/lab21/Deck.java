@@ -3,7 +3,6 @@ package apcs.lab.lab21;
 import java.util.Random;
 
 public class Deck {
-	//private Card[] deck = new Card[52];
 	private String[] suit = {"D","H","S","C"};
 	private int[] face = {1,2,3,4,5,6,7,8,9,10,11,12,13};
 	private Card card;
@@ -12,7 +11,6 @@ public class Deck {
 	private int dealToIndex = 0;
 	
 	public Deck() {		// create a new deck of cards
-		//this.card = new Card("D",5);	
 		for (int i=0; i<suit.length; i++) {
 			for (int j=0; j< face.length; j++) {
 				this.cardArr[cc] = new Card(this.suit[i], this.face[j]);
@@ -36,7 +34,11 @@ public class Deck {
 		}
 	}
 	
-	// create a splice from deck to deal 
+	public Card drawCard() {
+		// dealtoIndex is the last cardArr index that was drawn. So increment first to draw the next card.
+		return this.cardArr[++this.dealToIndex];
+	}
+	
 	
 	public Card[] getCardArr() {
 		return cardArr;

@@ -2,12 +2,13 @@ package apcs.lab.lab21;
 
 public class Player {
 	
-	private int numCards = 10;
-	private int[] faceUpIndex = new int[10]; //cardArray indexes that are face up.
+	private int dealCards = 10; // number of cards (10 or fewer) to deal this player. 
+	private Boolean[] isFaceUp = {false,false,false,false,false,false,false,false,false,false}; //cardArray indexes that are face up.
 	private Card[] hand = new Card[10];
+	
 	public Player(Deck deck, int startIndex) {
 		// beginning of game, create a hand of 10 cards
-		for (int i=0; i<numCards; i++) {
+		for (int i=0; i<dealCards; i++) {
 			// assign first 10 cards (change to alternating later)
 			hand[i] = deck.getCardArr()[startIndex+i];
 			/*
@@ -19,20 +20,20 @@ public class Player {
 		}
 		
 	}
-	public int getNumCards() {
-		return numCards;
+	public int getDealCards() {
+		return dealCards;
 	}
-	public void setNumCards(int numCards) {
-		this.numCards = numCards;
+	public void setDealCards(int dealCards) {
+		this.dealCards = dealCards;
 	}
 	public Card[] getHand() {
 		return hand;
 	}
-	public void setHand(Card[] hand) {
-		this.hand = hand;
+	public void setHand(Card hand, int index) {
+		this.hand[index] = hand;
 	}
-	public int[] getFaceUpIndex() {
-		return faceUpIndex;
+	public Boolean[] getIsfaceUp() {
+		return isFaceUp;
 	}
 
 }
