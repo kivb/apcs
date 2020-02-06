@@ -30,7 +30,7 @@ public class Garbage {
 	private void draw2(Player p) {
 		System.out.println("1\t2\t3\t4\t5\t6\t7\t8\t9\t10");
 		for (int i = 0; i < p.getHand().length; i++) {
-			if (p.getIsfaceUp()[i]) { // index is found in isFaceUp array. Show the card at this index.
+			if (p.getIsfaceUp(i)) { // index is found in isFaceUp array. Show the card at this index.
 				System.out.print(p.getHand()[i].getSuit() + p.getHand()[i].getFace() + "\t");
 			} else {
 				System.out.print("X\t");
@@ -46,18 +46,15 @@ public class Garbage {
 		int flipIndex;
 		System.out.println("\n\nWe drew: " + drawn.getSuit() + drawn.getFace() + "\n");
 		while (drawn.getFace() == 13 || drawn.getFace() < 11) {
-
 			if (drawn.getFace() == 13) {
 				// find the first unflipped card and flip it
 				for (int i = 0; i < p.getHand().length; i++) {
-
-					if (p.getIsfaceUp()[i]) {
-
+					if (p.getIsfaceUp(i)) { // card is face up
 						continue;
-					} else { // flip this card
+					} else { // card is face down
 						replaced = p.getHand()[i];
 						p.setHand(drawn, i);
-						p.getIsfaceUp()[i] = true; // set the card face up
+						p.setFaceUp(i); // set the card at index face up
 						this.drawBoard(p1, p2);
 						drawn = replaced;
 						break;
@@ -71,18 +68,20 @@ public class Garbage {
 				// current player
 				// NOTE: We do not check if the flipped position is a K
 				flipIndex = drawn.getFace()-1; // index starts at 0
-				if (p.getIsfaceUp()[flipIndex]) { // returns true if the card is already flipped. Can't use this card
-					
-					if (this.currPlayer.equals(this.p1)) { // set currentPlayer to other
+				if (p.getIsfaceUp(flipIndex)) { // returns true if the card is already flipped. Can't use this card
+					// Turn over. Set currentPlayer to other.
+					if (this.currPlayer.equals(this.p1)) { 
 						this.currPlayer = p2;
 					} else {
 						this.currPlayer = p1;
 					}
+					
+					this.drawBoard(p1, p2);
 
 				} else { // card is not flipped
-					replaced = p.getHand()[flipIndex];
+					replaced = p.getCardFromHand(flipIndex);
 					p.setHand(drawn, flipIndex);
-					p.getIsfaceUp()[flipIndex] = true; // set the card face up
+					p.setFaceUp(flipIndex);  // set the card face up
 					this.drawBoard(p1, p2);
 					drawn = replaced;
 					//break;

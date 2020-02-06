@@ -29,11 +29,17 @@ public class Player {
 	public Card[] getHand() {
 		return hand;
 	}
-	public void setHand(Card hand, int index) {
-		this.hand[index] = hand;
+	public Card getCardFromHand(int index) {
+		return this.hand[index];
 	}
-	public Boolean[] getIsfaceUp() {
-		return isFaceUp;
+	public void setHand(Card card, int index) {
+		this.hand[index] = card;
+	}
+	public Boolean getIsfaceUp(int index) {
+		return isFaceUp[index];
+	}
+	public void setFaceUp(int index) {
+		this.isFaceUp[index] = true;
 	}
 
 }
